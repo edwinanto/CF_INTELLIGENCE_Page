@@ -1,6 +1,7 @@
 import { PageHero, Icon } from "@/components/ui";
 import { ContactForm } from "@/components/contact-form";
 import { metadata } from "@/lib/seo";
+import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
 export const generateMetadata = () =>
   metadata(
     "Conversemos sobre tu proyecto",
@@ -19,6 +20,7 @@ export default async function ContactPage({
   );
   return (
     <>
+      <BreadcrumbSchema items={[{ name: "Contacto", path: "/contacto" }]} />
       <PageHero
         eyebrow="Una conversación puede ser el comienzo"
         title="El siguiente paso de tu negocio empieza aquí."

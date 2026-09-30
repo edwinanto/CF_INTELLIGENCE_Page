@@ -5,6 +5,7 @@ import {
   CTASection,
 } from "@/components/sections";
 import { metadata, siteUrl } from "@/lib/seo";
+import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
 export const generateMetadata = () =>
   metadata(
     "ClosetFlow — Gestión comercial para tu tienda",
@@ -14,6 +15,12 @@ export const generateMetadata = () =>
 export default function ClosetFlow() {
   return (
     <>
+      <BreadcrumbSchema
+        items={[
+          { name: "Productos CF", path: "/productos" },
+          { name: "ClosetFlow", path: "/productos/closetflow" },
+        ]}
+      />
       <PageHero
         eyebrow="Productos CF / ClosetFlow"
         title="Tu comercio tiene muchas piezas. Dales un mismo lugar."

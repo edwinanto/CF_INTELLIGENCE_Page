@@ -3,7 +3,7 @@ import { Header } from "@/components/header";
 import { NavigationScroll } from "@/components/navigation-scroll";
 import { Footer } from "@/components/footer";
 import { JsonLd } from "@/components/ui";
-import { siteUrl } from "@/lib/seo";
+import { siteUrl, indexable } from "@/lib/seo";
 import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl || "http://localhost:3000"),
@@ -13,7 +13,10 @@ export const metadata: Metadata = {
   },
   description:
     "Consultoría, software a medida, inteligencia artificial y automatización en Perú. Transformamos procesos de negocio en soluciones digitales inteligentes.",
-  robots: { index: Boolean(siteUrl), follow: Boolean(siteUrl) },
+  robots: { index: indexable, follow: true },
+  verification: { google: process.env.GOOGLE_SITE_VERIFICATION || undefined },
+  applicationName: "CF Intelligence",
+  category: "technology",
 };
 export default function RootLayout({
   children,

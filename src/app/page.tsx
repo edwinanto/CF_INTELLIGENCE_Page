@@ -34,9 +34,9 @@ export default function Home() {
             <span>Más inteligente.</span>
           </h1>
           <p>
-            Transformamos procesos y oportunidades en software, inteligencia
-            artificial y automatización. De entender tu negocio a construir lo
-            que sigue.
+            Desarrollamos software a medida, aplicamos inteligencia artificial y
+            automatizamos procesos para empresas en Perú. De entender tu negocio
+            a construir lo que sigue.
           </p>
           <div className="hero-actions">
             <ButtonLink href="/contacto">Cuéntanos tu proyecto</ButtonLink>

@@ -1,14 +1,30 @@
 import type { Metadata } from "next";
+import { resolveSeoConfig, excludedFromSearch, seoPages } from "./seo-config";
 export const siteName = "CF Intelligence";
-export const siteUrl = process.env.SITE_URL?.replace(/\/$/, "");
+export const { siteUrl, indexable } = resolveSeoConfig(process.env);
 export function metadata(
   title: string,
   description: string,
   path: string,
 ): Metadata {
+  const configured = seoPages[path];
+  title = configured?.title || title;
+  description = configured?.description || description;
+  const index = indexable && !excludedFromSearch.has(path);
   return {
     title,
     description,
+    robots: {
+      index,
+      follow: true,
+      googleBot: {
+        index,
+        follow: true,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+        "max-video-preview": -1,
+      },
+    },
     alternates: siteUrl ? { canonical: `${siteUrl}${path}` } : undefined,
     openGraph: {
       title: `${title} | ${siteName}`,

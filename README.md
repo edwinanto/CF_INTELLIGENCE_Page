@@ -38,14 +38,16 @@ Incluye 19 páginas de contenido, página 404, sitemap, robots, favicon y tarjet
 
 Copia `.env.example` a `.env.local` en desarrollo o define las variables en tu alojamiento:
 
-| Variable                | Uso                                                                                                |
-| ----------------------- | -------------------------------------------------------------------------------------------------- |
-| `SITE_URL`              | Dominio público HTTPS verificado, sin barra final. Activa canonical, URLs de Schema.org y sitemap. |
-| `CONTACT_WEBHOOK_URL`   | Endpoint HTTPS privado de recepción de consultas.                                                  |
-| `CONTACT_WEBHOOK_TOKEN` | Token enviado mediante `Authorization: Bearer` si el receptor lo requiere.                         |
-| `CONTACT_PRIVACY_READY` | `true` tras completar la información legal real de `/privacidad`.                                  |
+| Variable                | Uso                                                                                             |
+| ----------------------- | ----------------------------------------------------------------------------------------------- |
+| `SITE_URL`              | Dominio público HTTPS; por defecto `https://cf.app`. Configura canonical, Schema.org y sitemap. |
+| `CONTACT_WEBHOOK_URL`   | Endpoint HTTPS privado de recepción de consultas.                                               |
+| `CONTACT_WEBHOOK_TOKEN` | Token enviado mediante `Authorization: Bearer` si el receptor lo requiere.                      |
+| `CONTACT_PRIVACY_READY` | `true` tras completar la información legal real de `/privacidad`.                               |
 
-Sin `SITE_URL`, el sitio indica `noindex` y robots bloquea la indexación de la vista previa. Reconstruye después de configurar el dominio, porque las páginas y metadatos se generan durante el build.
+El dominio oficial configurado es `https://cf.app`. Los builds de producción permiten indexación; desarrollo usa `noindex`. En cualquier despliegue de pruebas define `SITE_INDEXABLE=false` antes de compilar. Reconstruye después de cambiar estas variables, porque páginas, robots y sitemap se generan durante el build.
+
+`GOOGLE_SITE_VERIFICATION` admite el valor de verificación HTML de Google Search Console. También puedes verificar la propiedad de dominio mediante un registro DNS TXT, sin cambiar el código. Consulta [la guía de lanzamiento SEO](docs/seo-google.md).
 
 ### Contrato del formulario
 
@@ -58,7 +60,7 @@ El formulario está deshabilitado hasta configurar el webhook y completar la pri
 ### Datos que debe proporcionar la empresa
 
 - Logo oficial para sustituir la marca tipográfica provisional.
-- Dominio definitivo.
+- DNS y alojamiento del dominio aprobado `cf.app`.
 - Razón social, domicilio, canal para ejercer derechos, conservación y proveedores de datos.
 - Destino de consultas y configuración de CRM.
 - Material autorizado de proyectos y casos. No se han inventado cifras, clientes ni testimonios.

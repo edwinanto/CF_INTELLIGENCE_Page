@@ -1,11 +1,11 @@
 import type { MetadataRoute } from "next";
-import { siteUrl } from "@/lib/seo";
+import { siteUrl, indexable } from "@/lib/seo";
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: {
       userAgent: "*",
-      ...(siteUrl ? { allow: "/", disallow: "/api/" } : { disallow: "/" }),
+      ...(indexable ? { allow: "/", disallow: "/api/" } : { disallow: "/" }),
     },
-    ...(siteUrl ? { sitemap: `${siteUrl}/sitemap.xml` } : {}),
+    ...(indexable ? { sitemap: `${siteUrl}/sitemap.xml` } : {}),
   };
 }

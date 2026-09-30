@@ -1,11 +1,12 @@
 import type { MetadataRoute } from "next";
 import { services } from "@/lib/content";
 import { articles } from "@/lib/articles";
-import { siteUrl } from "@/lib/seo";
+import { siteUrl, indexable } from "@/lib/seo";
+import { excludedFromSearch } from "@/lib/seo-config";
 export default function sitemap(): MetadataRoute.Sitemap {
-  if (!siteUrl) return [];
+  if (!indexable) return [];
   const routes = [
-    "",
+    "/",
     "/nosotros",
     "/servicios",
     ...services.map((s) => `/${s.slug}`),
@@ -18,9 +19,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/contacto",
     "/privacidad",
   ];
-  return routes.map((path) => ({
-    url: `${siteUrl}${path}`,
-    changeFrequency: "monthly",
-    priority: path === "" ? 1 : 0.7,
-  }));
+  return routes
+    .filter((path) => !excludedFromSearch.has(path))
+    .map((path) => ({
+      url: `${siteUrl}${path}`,
+    }));
 }

@@ -4,6 +4,7 @@ import { articles } from "@/lib/articles";
 import { metadata, siteUrl } from "@/lib/seo";
 import { Icon, JsonLd } from "@/components/ui";
 import { CTASection, ArticleCard } from "@/components/sections";
+import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
 export const dynamicParams = false;
 export const generateStaticParams = () =>
   articles.map((a) => ({ slug: a.slug }));
@@ -31,6 +32,12 @@ export default async function ArticlePage({
   if (!article) notFound();
   return (
     <>
+      <BreadcrumbSchema
+        items={[
+          { name: "Ideas y recursos", path: "/blog" },
+          { name: article.title, path: `/blog/${slug}` },
+        ]}
+      />
       <article className="container article-page">
         <Link href="/blog" className="text-link">
           <span aria-hidden="true">←</span> Ideas y recursos
